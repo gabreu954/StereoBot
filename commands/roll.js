@@ -13,80 +13,86 @@ module.exports = {
 
         if (args[0].indexOf('d') > -1) {
 
-        //#region Variáveis Auxiliares
+            if (!(args[0].indexOf('d0') > -1)) {
+                //#region Variáveis Auxiliares
 
-            var body = [];
+                var body = [];
 
-            var bodyNum = [];
+                var bodyNum = [];
 
-            var rollValues = [];
+                var rollValues = [];
 
-            let result = null;
+                let result = null;
 
-            var num = null;
+                var num = null;
 
-            var numberDice = null;
+                var numberDice = null;
 
-            var typeDice =  null;
+                var typeDice = null;
 
-            var soma = null;
+                var soma = null;
 
-            //#endregion
-            
-        //#region Lógica
-            if (args[0].indexOf('+') > -1) {
+                //#endregion
 
-                body = Separar(args[0], '+');
+                //#region Lógica
+                if (args[0].indexOf('+') > -1) {
 
-                num = parseInt(body[1]);
+                    body = Separar(args[0], '+');
 
-                bodyNum = Separar(body[0], 'd');
+                    num = parseInt(body[1]);
 
-                numberDice = bodyNum[0];
-                typeDice = bodyNum[1];
+                    bodyNum = Separar(body[0], 'd');
 
-                rollValues = rollDice(numberDice, typeDice);
+                    numberDice = bodyNum[0];
+                    typeDice = bodyNum[1];
 
-                soma = parseInt(somarRolagens(rollValues));
+                    rollValues = rollDice(numberDice, typeDice);
 
-                result = soma+num;
+                    soma = parseInt(somarRolagens(rollValues));
 
-            }
+                    result = soma + num;
 
-            else if (args[0].indexOf('-') > -1) {
+                }
 
-                body = Separar(args[0], '-');
+                else if (args[0].indexOf('-') > -1) {
 
-                num = parseInt(body[1]);
+                    body = Separar(args[0], '-');
 
-                bodyNum = Separar(body[0], 'd');
+                    num = parseInt(body[1]);
 
-                numberDice = bodyNum[0];
-                typeDice = bodyNum[1];
+                    bodyNum = Separar(body[0], 'd');
 
-                rollValues = rollDice(numberDice, typeDice);
+                    numberDice = bodyNum[0];
+                    typeDice = bodyNum[1];
 
-                soma = parseInt(somarRolagens(rollValues));
+                    rollValues = rollDice(numberDice, typeDice);
 
-                result = soma-num;
+                    soma = parseInt(somarRolagens(rollValues));
 
+                    result = soma - num;
+
+                }
+                else {
+
+                    body = Separar(args[0], 'd');
+
+                    numberDice = body[0];
+                    typeDice = body[1];
+
+                    rollValues = rollDice(numberDice, typeDice);
+
+                    result = parseInt(somarRolagens(rollValues));
+
+                }
+                //#endregion
+
+                message.channel.send(`${message.author}: [${rollValues}] :arrow_right:  ${result}`);
             }
             else {
-
-                body = Separar(args[0], 'd');
-
-                numberDice = body[0];
-                typeDice = body[1];
-
-                rollValues = rollDice(numberDice, typeDice);
-
-                result = parseInt(somarRolagens(rollValues));
-
+                return message.channel.send(`Não existe um dado de lados inexistentes, ${message.author}!`);
             }
-//#endregion
-
-            message.channel.send(`${message.author}: [${rollValues}] :arrow_right:  ${result}`);
         }
+
         else {
 
             return message.channel.send(`Você não colocou os argumentos corretos, ${message.author}!`);
@@ -126,7 +132,6 @@ module.exports = {
             return sum;
         }
         //#endregion
-    
 
     }
 
