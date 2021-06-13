@@ -56,6 +56,8 @@ client.on("message",
         else if(command =='roll' || command == 'r'){
             client.commands.get('roll').execute(message, args);
         }
+        else
+            message.channel.send('Comando Inválido!');
     }
 );
 //#endregion

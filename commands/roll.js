@@ -11,9 +11,13 @@ module.exports = {
         if (!args.length)
             return message.channel.send(`Você não colocou argumentos, ${message.author}!`);
 
+        
+            
+        //#region Processo
         if (args[0].indexOf('d') > -1) {
 
             if (!(args[0].indexOf('d0') > -1)) {
+
                 //#region Variáveis Auxiliares
 
                 var body = [];
@@ -98,6 +102,7 @@ module.exports = {
             return message.channel.send(`Você não colocou os argumentos corretos, ${message.author}!`);
         }
 
+        //#endregion
 
         //#region Rolar dados
 
